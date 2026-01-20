@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EROWNİE</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+/* ORTA ALAN */
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    text-align: center;
+    animation: popIn 2s ease-out forwards;
+    z-index: 10;
+}
+
+@keyframes popIn {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ANA YAZI */
+h1 {
+    font-size: 2.6rem;
+    margin-bottom: 35px;
+    color: #2fffdc;
+    text-shadow:
+        0 0 10px #2fffdc,
+        0 0 30px #1adbc3,
+        0 0 60px #0bb;
+}
+
+/* BUTONLAR */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* EVET */
+#yes {
+    background: #2fffdc;
+    color: black;
+    box-shadow: 0 0 20px #2fffdc;
+}
+
+/* HAYIR */
+#no {
+    background: #444;
+    color: white;
+    position: relative;
+}
+
+/* KONFETİ */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(600px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* HAVAİ FİŞEK */
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #2fffdc;
+    border-radius: 50%;
+    animation: explode 1.8s ease-out forwards;
+}
+
+@keyframes explode {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(18);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="center">
+    <h1>
+        Sence EROWNİE<br>
+        dünyanın en iyi kanalı mı?
+    </h1>
+
+    <div class="buttons">
+        <button id="yes">EVET</button>
+        <button id="no">HAYIR</button>
+    </div>
+</div>
+
+<script>
+/* ✅ YOUTUBE LİNKİ (HAZIR) */
+const youtubeLink = "https://www.youtube.com/@erownie";
+
+/* EVET → KONFETİ + YOUTUBE */
+document.getElementById("yes").onclick = () => {
+    for (let i = 0; i < 90; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * window.innerWidth + "px";
+        c.style.top = "-10px";
+        c.style.backgroundColor =
+            ["#2fffdc","#00c9b7","#6fffea","#1adbc3","#00ffee"]
+            [Math.floor(Math.random()*5)];
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+    }
+
+    setTimeout(() => {
+        window.location.href = youtubeLink;
+    }, 1200);
+};
+
+/* HAYIR → SADECE KAÇIYOR */
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseenter", () => {
+    const x = Math.random() * (window.innerWidth - 140);
+    const y = Math.random() * (window.innerHeight - 80);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+/* HAVAİ FİŞEK */
+setInterval(() => {
+    const f = document.createElement("div");
+    f.className = "firework";
+    f.style.left = Math.random() * 100 + "%";
+    f.style.top = Math.random() * 100 + "%";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 1800);
+}, 600);
+</script>
+
+</body>
+</html>
